@@ -24,7 +24,7 @@ loader
         'images/Idle (8).png',
         'images/Idle (9).png'
     ])
-    //.on("progress", loadProgressHandler)
+    //.on("progress", loadProgressHandler) - TODO: finish progress bar, implement functions etc.
     .load(setup);
 
 // function loadProgressHandler() {
@@ -35,6 +35,11 @@ function setup() {
 
     // Create `zombie` sprite, add it to the stage, and render it
     var zombie = new Sprite(resources['images/Idle (1).png'].texture);
+
+    // new position for zombie - for now tossed in the air
+    zombie.x = -90;
+    zombie.y = -90;
+
     stage.addChild(zombie);
     renderer.render(stage);
 }
