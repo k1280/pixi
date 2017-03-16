@@ -37,9 +37,22 @@ function setup() {
     var zombie = new Sprite(resources['images/Idle (1).png'].texture);
 
     // new position for zombie - for now tossed in the air
-    zombie.x = -90;
-    zombie.y = -90;
+    zombie.height = 120;
+    zombie.width = 90;
 
     stage.addChild(zombie);
     renderer.render(stage);
+
+    function gameLoop() {
+        // Loop this function at 60 frames per second
+        requestAnimationFrame(gameLoop);
+        // more like pushing the zombie forward
+        zombie.x += 1;
+        //Render the stage to see the animation
+        renderer.render(stage);
+    }
+
+    //Start the game loop
+    gameLoop();
 }
+
