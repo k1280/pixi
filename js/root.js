@@ -1,22 +1,40 @@
-var type = "WebGL"
-if (!PIXI.utils.isWebGLSupported()) {
-    type = "canvas"
-}
-PIXI.utils.sayHello(type)
+// Prepared aliases
+var Container = PIXI.Container,
+    autoDetectRenderer = PIXI.autoDetectRenderer,
+    loader = PIXI.loader,
+    resources = PIXI.loader.resources,
+    Sprite = PIXI.Sprite;
 
-var stage = new PIXI.Container(), //Create a container object - `stage`
-    renderer = PIXI.autoDetectRenderer(500, 500); //Creating renderer
-document.body.appendChild(renderer.view); //Adding canvas to the HTML document
+// Create a Pixi stage and renderer and add the 
+// renderer.view to the DOM
+var stage = new Container(),
+    renderer = autoDetectRenderer(500, 500);
+document.body.appendChild(renderer.view);
 
-PIXI.loader //Using built-in `loader` object to load images
-    .add('images/Idle (1).png')
-    .load(setup); 
+// load an image and run the `setup` function when it's done
+loader
+    .add([
+        'images/Idle (1).png',
+        'images/Idle (2).png',
+        'images/Idle (3).png',
+        'images/Idle (4).png',
+        'images/Idle (5).png',
+        'images/Idle (6).png',
+        'images/Idle (7).png',
+        'images/Idle (8).png',
+        'images/Idle (9).png'
+    ])
+    //.on("progress", loadProgressHandler)
+    .load(setup);
+
+// function loadProgressHandler() {
+//     console.log("loading");
+// }
 
 function setup() {
-    var zombie = new PIXI.Sprite(
-        PIXI.loader.resources['images/Idle (1).png'].texture
-    );
 
-    stage.addChild(zombie); //Adding zombie to the stages
-    renderer.render(stage); //Tell the `renderer` to `render` the `stage` 
+    // Create `zombie` sprite, add it to the stage, and render it
+    var zombie = new Sprite(resources['images/Idle (1).png'].texture);
+    stage.addChild(zombie);
+    renderer.render(stage);
 }
