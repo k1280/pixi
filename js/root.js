@@ -38,12 +38,20 @@ function setup() {
     floor = new Sprite(resources['images/Tile (2).png'].texture);
     // Create `zombie` sprite, add it to the stage, and render it
     zombie = new Sprite(resources['images/Idle (1).png'].texture);
+    
     floor.scale.x = 4;
     floor.scale.y = 0.3;
     floor.y = 145;
-
     zombie.scale.x = 0.3;
     zombie.scale.y = 0.3;
+
+    zombie.x = 0;
+    zombie.y = 0;
+
+    zombie.vx = 0;
+    zombie.vy = 0;
+    zombie.x += zombie.vx;
+    zombie.y += zombie.vy;
 
     // new position for zombie - for now tossed in the air
     // zombie.height = 120;
@@ -64,8 +72,11 @@ function setup() {
 function gameLoop() {
     // Loop this function at 60 frames per second
     requestAnimationFrame(gameLoop);
-    // more like pushing the zombie forward
-    zombie.x += 1;
+   
+    zombie.vx = 1;
+    zombie.vy = 1;
+    zombie.x += zombie.vx;
+    zombie.y += zombie.vy;
     //Render the stage to see the animation
     renderer.render(stage);
 }
