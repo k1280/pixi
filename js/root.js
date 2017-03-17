@@ -8,7 +8,9 @@ var Container = PIXI.Container,
 // Create a Pixi stage and renderer and add the 
 // renderer.view to the DOM
 var stage = new Container(),
-    renderer = autoDetectRenderer(500, 500);
+    renderer = autoDetectRenderer(500, 500, {
+        antialias: false, transparent: false, resolution: 1
+    });
 document.body.appendChild(renderer.view);
 
 // load an image and run the `setup` function when it's done
@@ -24,6 +26,7 @@ loader
         'images/Idle (8).png',
         'images/Idle (9).png'
     ])
+    .add('images/Tile (2).png')
     //.on("progress", loadProgressHandler) - TODO: finish progress bar, implement functions etc.
     .load(setup);
 
@@ -32,14 +35,20 @@ loader
 // }
 var zombie;
 function setup() {
-
+    floor = new Sprite(resources['images/Tile (2).png'].texture);
     // Create `zombie` sprite, add it to the stage, and render it
     zombie = new Sprite(resources['images/Idle (1).png'].texture);
+    floor.scale.x = 4;
+    floor.scale.y = 0.3;
+    floor.y = 145;
+
+    zombie.scale.x = 0.3;
+    zombie.scale.y = 0.3;
 
     // new position for zombie - for now tossed in the air
-    zombie.height = 120;
-    zombie.width = 90;
-
+    // zombie.height = 120;
+    // zombie.width = 90;
+    stage.addChild(floor);
     stage.addChild(zombie);
 
     //     //Capture the keyboard arrow keys
