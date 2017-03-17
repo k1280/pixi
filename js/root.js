@@ -33,12 +33,12 @@ loader
 // function loadProgressHandler() {
 //     console.log("loading");
 // }
-var zombie;
+let zombie, floor;
 function setup() {
     floor = new Sprite(resources['images/Tile (2).png'].texture);
     // Create `zombie` sprite, add it to the stage, and render it
     zombie = new Sprite(resources['images/Idle (1).png'].texture);
-    
+
     floor.scale.x = 4;
     floor.scale.y = 0.3;
     floor.y = 145;
@@ -53,9 +53,6 @@ function setup() {
     zombie.x += zombie.vx;
     zombie.y += zombie.vy;
 
-    // new position for zombie - for now tossed in the air
-    // zombie.height = 120;
-    // zombie.width = 90;
     stage.addChild(floor);
     stage.addChild(zombie);
 
@@ -69,16 +66,20 @@ function setup() {
     gameLoop();
 
 }
+let state = play;
+
 function gameLoop() {
-    // Loop this function at 60 frames per second
     requestAnimationFrame(gameLoop);
-   
+    state();
+
+    renderer.render(stage);
+}
+
+function play() {
     zombie.vx = 1;
     zombie.vy = 1;
     zombie.x += zombie.vx;
     zombie.y += zombie.vy;
-    //Render the stage to see the animation
-    renderer.render(stage);
 }
 
 
