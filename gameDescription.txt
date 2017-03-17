@@ -1,4 +1,4 @@
-Game type: tower defence.
+Game type: tower defence.  // but still thinking maybe about avoiding zombies (so the hero moves on the screen..?)
 
 Heroes: tower (can be upgraded).
 Enemies: zombies (different types, depends on the level).
