@@ -1,0 +1,8 @@
+Game type: tower defence.
+
+Heroes: tower (can be upgraded).
+Enemies: zombies (different types, depends on the level).
+
+Levels: waiting for the decision.
+Upgrades of tower: waiting for the decision.
+Enemy types: waiting for the description.            <--- soon there will be an update
