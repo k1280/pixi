@@ -143,9 +143,41 @@ function play() {
     zombie.vx *= zombie.frictionX;
     zombie.vy *= zombie.frictionY;
 
+    zombie.vy += 0.1; //gravity
+
     zombie.x += zombie.vx;
     zombie.y += zombie.vy;
 
+    //Use the `contain` function to keep the sprite inside the canvas
+
+    let collision = contain(
+        zombie,
+        //The sprite you want to contain
+        {
+            //An object that defines the area
+            x: 0, //`x` position
+            y: 0, //`y` position
+            width: renderer.view.width, //`width`
+            height: renderer.view.height //`height`
+        }
+    );
+
+
+    //Check for a collision. If the value of `collision` isn't
+    //`undefined` then you know the sprite hit a boundary
+
+    if (collision) {
+
+        //Reverse the sprite's `vx` value if it hits the left or right
+        if (collision.has("left") || collision.has("right")) {
+            zombie.vx = -zombie.vx;
+        }
+
+        //Reverse the sprite's `vy` value if it hits the top or bottom
+        if (collision.has("top") || collision.has("bottom")) {
+            zombie.vy = -zombie.vy;
+        }
+    }
 }
 
 
@@ -194,4 +226,41 @@ keyObject.release = () => {
     //key object released
 };
 
-// TODO: review chapter about friction, prepare flying zombies
+// Contain function:
+
+function contain(sprite, container) {
+
+    //Create a `Set` called `collision` to keep track of the
+    //boundaries with which the sprite is colliding
+    var collision = new Set();
+
+    //Left
+    if (sprite.x < container.x) {
+        sprite.x = container.x;
+        collision.add("left");
+    }
+
+    //Top
+    if (sprite.y < container.y) {
+        sprite.y = container.y;
+        collision.add("top");
+    }
+
+    //Right
+    if (sprite.x + sprite.width > container.width) {
+        sprite.x = container.width - sprite.width;
+        collision.add("right");
+    }
+
+    //Bottom
+    if (sprite.y + sprite.height > container.height) {
+        sprite.y = container.height - sprite.height;
+        collision.add("bottom");
+    }
+
+    //If there were no collisions, set `collision` to `undefined`
+    if (collision.size === 0) collision = undefined;
+
+    //Return the `collision` value
+    return collision;
+}
