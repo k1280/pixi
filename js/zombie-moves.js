@@ -5,7 +5,7 @@ let Container = PIXI.Container,
     Sprite = PIXI.Sprite;
 
 let stage = new Container(),
-    renderer = autoDetectRenderer(512, 512);
+    renderer = autoDetectRenderer(1100, 600);
 document.body.appendChild(renderer.view);
 
 //setting for canvas (border style, background color)
@@ -14,13 +14,18 @@ renderer.backgroundColor = '0x000000';
 
 //my zombie
 loader
-    .add('images/Idle (1).png')
+    .add('images/BG.png')
+    .add('images/idle/Idle (1).png')
     .load(setup);
 
-let zombie, state;
+let zombie, state, background;
 
 function setup() {
-    zombie = new Sprite(resources['images/Idle (1).png'].texture);
+    background = new Sprite(resources['images/BG.png'].texture);
+    background.scale.x = 0.7;
+    background.scale.y = 0.6;
+    
+    zombie = new Sprite(resources['images/idle/Idle (1).png'].texture);
     zombie.scale.x = 0.3;
     zombie.scale.y = 0.3;
     zombie.x = renderer.view.width / 2 - zombie.width / 2;
@@ -28,7 +33,7 @@ function setup() {
 
     zombie.vx = 0;
     zombie.vy = 0;
-
+    stage.addChild(background);
     stage.addChild(zombie);
 
     //capture keyboard arrows (based on tutorial for pixiJS)
@@ -92,6 +97,7 @@ function gameLoop() {
     state();
     renderer.render(stage);
 }
+
 function play() {
     zombie.x += zombie.vx;
     zombie.y += zombie.vy;
