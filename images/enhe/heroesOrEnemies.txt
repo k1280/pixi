@@ -1,0 +1,7 @@
+Here there will be heroes or enemie.
+
+I didn't decide (yet) if zombie will be a main character? Or will there be some "normal" character that will go through zombie world. For now there is a mix of different graphics that I will maybe use.
+
+Also some levels textures (TODO: change colors and theme a little bit, to be more 'zombie' flavor).
+
+Some buttons for GUI (TODO: upgrade with zombie graphics, add skulls etc.)
