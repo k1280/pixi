@@ -27,23 +27,17 @@ function setup() {
     background.scale.y = 0.6;
 
     skull = new Sprite(resources['images/bullets/skull.png'].texture);
-    skull.scale.x = 0.3;
-    skull.scale.y = 0.3;
+    skull.scale.x = 0.8;
+    skull.scale.y = 0.8;
 
-    skull.accelerationX = 0;
-    skull.accelerationY = 0;
-    skull.frictionX = 1;
-    skull.frictionY = 1;
-
-    skull.speed = 0.2;
-    skull.drag = 0.98;
-
+    skull.x = renderer.view.width / 2;
+    skull.y = renderer.view.height/2 - skull.width / 2;
 
     zombie = new Sprite(resources['images/idle/Idle (1).png'].texture);
     zombie.scale.x = 0.3;
     zombie.scale.y = 0.3;
     zombie.x = renderer.view.width / 2 - zombie.width / 2;
-    zombie.x = renderer.view.height / 2 - zombie.height / 2;
+    zombie.x= renderer.view.height / 2 - zombie.height / 2;
 
     zombie.vx = 0;
     zombie.vy = 0;
@@ -264,3 +258,7 @@ function contain(sprite, container) {
     //Return the `collision` value
     return collision;
 }
+
+b = new Bump(PIXI);
+b.hitTestRectangle(zombie, skull);
+
